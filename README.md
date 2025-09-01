@@ -41,9 +41,16 @@ nano 90-touchpad.conf
 
 and paste the content of the file
 
+### neovim config : 
 
+* install nvim : 
+```
+sudo apt install neovim
+```
+* create config dir : 
 
+```
+mkdir -p ~/.config/nvim
+```
 
-
-
-
+* copy init.vim file there 
