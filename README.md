@@ -13,18 +13,30 @@ if [ -z "$TMUX" ]; then
 	/home/moeez/automation/auotmated-scripts/open_tmux_in_terminal.sh
 fi
 ```
-### i3.config 
-if you are on ubuntu then 
 
-* go to :
+### i3.config
+
+if you are on ubuntu then
+
+- install :
+
+```
+sudo apt install i3lock
+```
+
+- go to :
+
 ```
 cd ~/.config/i3
 ```
-* open : 
+
+- open :
+
 ```
 nano config
 ```
-* remove bar block 
+
+- remove bar block
 
 paste PERSONAL CODE BLOCK and restart i3
 
@@ -33,24 +45,27 @@ paste PERSONAL CODE BLOCK and restart i3
 ```
 cd /etc/X11/xorg.conf.d
 ```
-create the file : 
+
+create the file :
 
 ```
-nano 90-touchpad.conf 
+nano 90-touchpad.conf
 ```
 
 and paste the content of the file
 
-### neovim config : 
+### neovim config :
 
-* install nvim : 
+- install nvim :
+
 ```
 sudo apt install neovim
 ```
-* create config dir : 
+
+- create config dir :
 
 ```
 mkdir -p ~/.config/nvim
 ```
 
-* copy init.vim file there 
+- copy init.vim file there
