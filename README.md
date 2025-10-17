@@ -54,6 +54,14 @@ nano 90-touchpad.conf
 
 and paste the content of the file
 
+### i3 status config
+
+```
+ nano ~/.i3status.conf
+```
+
+copy i3status.conf
+
 ### neovim config :
 
 - install nvim :
