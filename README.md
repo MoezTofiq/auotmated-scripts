@@ -62,6 +62,12 @@ and paste the content of the file
 
 copy i3status.conf
 
+### Bash config
+
+`sudo nano ~/.bashrc `
+
+copy code from `barshrc` at the bottom of it
+
 ### neovim config :
 
 - install nvim :
