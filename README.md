@@ -21,7 +21,7 @@ if you are on ubuntu then
 - install :
 
 ```
-sudo apt install i3lock
+sudo apt install i3lock xdotool brightnessctl playerctl i3status fonts-dejavu pulseaudio-utils pipewire-pulse
 ```
 
 - go to :
