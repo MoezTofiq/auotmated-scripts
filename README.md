@@ -40,6 +40,21 @@ nano config
 
 paste PERSONAL CODE BLOCK and restart i3
 
+- add external display options : 
+
+```
+mkdir -p ~/.config/i3/scripts
+```
+copy the files in the new scripts folder: 
+internal_mirror.sh
+external_only.sh 
+
+run the commands : 
+```
+chmod +x ~/.config/i3/scripts/internal_mirror.sh 
+chmod +x ~/.config/i3/scripts/external_only.sh
+```
+
 ### 90-touch.conf
 
 ```
