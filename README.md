@@ -21,7 +21,7 @@ if you are on ubuntu then
 - install :
 
 ```
-sudo apt install i3lock xdotool brightnessctl playerctl i3status fonts-dejavu pulseaudio-utils pipewire-pulse
+sudo apt install i3lock xdotool brightnessctl playerctl i3status fonts-dejavu pulseaudio-utils pipewire-pulse rofi
 ```
 
 - go to :
@@ -37,6 +37,7 @@ nano config
 ```
 
 - remove bar block
+- remove or comment out dmenu binding
 
 paste PERSONAL CODE BLOCK and restart i3
 
