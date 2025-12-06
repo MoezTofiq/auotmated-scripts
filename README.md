@@ -98,3 +98,15 @@ mkdir -p ~/.config/nvim
 ```
 
 - copy init.vim file there
+
+
+### overall package install for ubuntu : 
+
+```
+sudo apt install joystick jstest-gtk
+
+```
+```
+sudo cp 30-logitech-F710-gamepad.rules /etc/udev/rules.d/
+
+```
