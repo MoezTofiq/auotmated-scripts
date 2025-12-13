@@ -8,6 +8,8 @@ sudo apt full-upgrade  # Installs updates; may also remove some packages, if nee
 
 sudo apt autoremove    # Removes any old packages that are no longer needed
 
+sudo apt install build-essential dkms # need to only do this once per os install 
+
 sudo ubuntu-drivers autoinstall
 
 sudo reboot
