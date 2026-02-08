@@ -42,6 +42,8 @@ snap installs :
 sudo snap install todoist
 ```
 
+install nvidea package :https://wiki.debian.org/NvidiaGraphicsDrivers
+
 install docker :
 https://docs.docker.com/engine/install/debian/
 
