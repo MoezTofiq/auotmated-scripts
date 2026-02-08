@@ -61,6 +61,17 @@ sudo apt install nvidia-driver-libs:i386
 
 need to enable non-free repos with nvidia driver install
 
+system restore :
+
+```
+sudo apt install timeshift
+sudo timeshift-gtk
+```
+
+- RSYNC - file system
+- weekly snapshots
+- monthly - keep files
+
 ### i3.config
 
 if you are on ubuntu then
