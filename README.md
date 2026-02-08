@@ -28,7 +28,7 @@ apt installs :
 
 ```
 
-sudo apt install code snapd
+sudo apt install code snapd git
 
 ```
 
@@ -44,6 +44,9 @@ sudo snap install todoist
 
 install docker :
 https://docs.docker.com/engine/install/debian/
+
+install nvm and node :
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04#option-3-installing-node-using-the-node-version-manager
 
 need to enable non-free repos with nvidia driver install
 
