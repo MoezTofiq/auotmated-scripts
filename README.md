@@ -53,6 +53,12 @@ https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubunt
 install steam :
 https://wiki.debian.org/Steam#NVIDIA
 
+before you run steam do :
+
+```
+sudo apt install nvidia-driver-libs:i386
+```
+
 need to enable non-free repos with nvidia driver install
 
 ### i3.config
