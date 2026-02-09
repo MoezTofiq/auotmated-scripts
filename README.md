@@ -104,16 +104,20 @@ copy and paste :
 
 #!/bin/bash
 
-options="Shutdown\nReboot\nLogout\nSuspend"
+options="Shutdown
+Reboot
+Logout
+Suspend"
 
-chosen=$(echo -e $options | rofi -dmenu -i -p "Power")
+chosen=$(printf "%s\n" "$options" | rofi -dmenu -i -p "Power")
 
 case "$chosen" in
-Shutdown) systemctl poweroff ;;
-Reboot) systemctl reboot ;;
-Logout) i3-msg exit ;;
-Suspend) systemctl suspend ;;
+  Shutdown) systemctl poweroff ;;
+  Reboot) systemctl reboot ;;
+  Logout) i3-msg exit ;;
+  Suspend) systemctl suspend ;;
 esac
+
 
 ```
 
