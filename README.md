@@ -161,6 +161,7 @@ mkdir -p ~/.config/i3/scripts
 copy the files in the new scripts folder:
 internal_mirror.sh
 external_only.sh
+split_workspaces.sh
 
 run the commands :
 
@@ -168,6 +169,7 @@ run the commands :
 
 chmod +x ~/.config/i3/scripts/internal_mirror.sh
 chmod +x ~/.config/i3/scripts/external_only.sh
+chmod +x ~/.config/i3/scripts/split_workspaces.sh
 
 ```
 
