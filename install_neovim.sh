@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e  # Exit on error
+set -e # Exit on error
 
 echo "========================================="
 echo "Installing Neovim with LazyVim"
@@ -19,13 +19,13 @@ NC='\033[0m' # No Color
 # ============================================
 echo -e "${BLUE}Step 1: Installing Neovim...${NC}"
 
-if command -v nvim &> /dev/null; then
-    NVIM_VERSION=$(nvim --version | head -n1)
-    echo "Neovim already installed: $NVIM_VERSION"
+if command -v nvim &>/dev/null; then
+  NVIM_VERSION=$(nvim --version | head -n1)
+  echo "Neovim already installed: $NVIM_VERSION"
 else
-    echo "Installing Neovim via snap..."
-    sudo snap install nvim --classic
-    echo -e "${GREEN}✓ Neovim installed${NC}"
+  echo "Installing Neovim via snap..."
+  sudo snap install nvim --classic
+  echo -e "${GREEN}✓ Neovim installed${NC}"
 fi
 
 # ============================================
@@ -46,13 +46,34 @@ sudo apt install -y ripgrep
 # Install fd (for fast file finding)
 sudo apt install -y fd-find
 if [ -f /usr/bin/fdfind ] && [ ! -f /usr/local/bin/fd ]; then
-    sudo ln -s /usr/bin/fdfind /usr/local/bin/fd
+  sudo ln -s /usr/bin/fdfind /usr/local/bin/fd
 fi
+
+# Install fzf from git (for fuzzy finding)
+echo "Installing fzf from git..."
+# if [ ! -d "$HOME/.fzf" ]; then
+#   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+#   ~/.fzf/install --all
+#   echo -e "${GREEN}✓ fzf installed${NC}"
+# else
+#   echo "fzf already installed"
+# fi
+sudo apt install -y fzf
 
 # Install tree-sitter CLI (optional but useful)
 sudo npm install -g tree-sitter-cli || echo "Warning: tree-sitter-cli failed to install"
 
 echo -e "${GREEN}✓ Dependencies installed${NC}"
+
+# ============================================
+# STEP 2.5: Install Lazygit
+# ============================================
+echo ""
+echo -e "${BLUE}Step 2.5: Installing Lazygit...${NC}"
+
+sudo apt install -y lazygit
+
+echo -e "${GREEN}✓ Lazygit installed${NC}"
 
 # ============================================
 # STEP 3: Install Language Servers
@@ -76,12 +97,12 @@ sudo npm install -g @tailwindcss/language-server
 echo -e "${GREEN}✓ Tailwind LSP installed${NC}"
 
 # Go
-if command -v go &> /dev/null; then
-    echo "Installing Go Language Server..."
-    go install golang.org/x/tools/gopls@latest
-    echo -e "${GREEN}✓ Go LSP installed${NC}"
+if command -v go &>/dev/null; then
+  echo "Installing Go Language Server..."
+  go install golang.org/x/tools/gopls@latest
+  echo -e "${GREEN}✓ Go LSP installed${NC}"
 else
-    echo -e "${YELLOW}⚠ Go not found, skipping gopls installation${NC}"
+  echo -e "${YELLOW}⚠ Go not found, skipping gopls installation${NC}"
 fi
 
 # C++
@@ -98,21 +119,21 @@ echo -e "${BLUE}Step 4: Backing up existing Neovim config...${NC}"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 if [ -d "$HOME/.config/nvim" ]; then
-    echo "Backing up existing config..."
-    mv ~/.config/nvim ~/.config/nvim.backup.$TIMESTAMP
-    echo -e "${GREEN}✓ Backup created: ~/.config/nvim.backup.$TIMESTAMP${NC}"
+  echo "Backing up existing config..."
+  mv ~/.config/nvim ~/.config/nvim.backup.$TIMESTAMP
+  echo -e "${GREEN}✓ Backup created: ~/.config/nvim.backup.$TIMESTAMP${NC}"
 fi
 
 if [ -d "$HOME/.local/share/nvim" ]; then
-    mv ~/.local/share/nvim ~/.local/share/nvim.backup.$TIMESTAMP
+  mv ~/.local/share/nvim ~/.local/share/nvim.backup.$TIMESTAMP
 fi
 
 if [ -d "$HOME/.local/state/nvim" ]; then
-    mv ~/.local/state/nvim ~/.local/state/nvim.backup.$TIMESTAMP
+  mv ~/.local/state/nvim ~/.local/state/nvim.backup.$TIMESTAMP
 fi
 
 if [ -d "$HOME/.cache/nvim" ]; then
-    mv ~/.cache/nvim ~/.cache/nvim.backup.$TIMESTAMP
+  mv ~/.cache/nvim ~/.cache/nvim.backup.$TIMESTAMP
 fi
 
 # ============================================
@@ -138,7 +159,7 @@ mkdir -p ~/.config/nvim/lua/config
 mkdir -p ~/.config/nvim/lua/plugins
 
 # Create options.lua (settings)
-cat > ~/.config/nvim/lua/config/options.lua << 'EOF'
+cat >~/.config/nvim/lua/config/options.lua <<'EOF'
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 
@@ -184,7 +205,7 @@ opt.sidescrolloff = 8      -- Min number of columns to keep left/right of cursor
 EOF
 
 # Create keymaps.lua (keybindings)
-cat > ~/.config/nvim/lua/config/keymaps.lua << 'EOF'
+cat >~/.config/nvim/lua/config/keymaps.lua <<'EOF'
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
@@ -279,8 +300,8 @@ keymap.set("t", "<C-`>", "<C-\\><C-n>:ToggleTerm<CR>", { desc = "Toggle terminal
 keymap.set("t", "<Esc>", "<C-\\><C-n>", opts)
 EOF
 
-# Create custom plugins configuration
-cat > ~/.config/nvim/lua/plugins/custom.lua << 'EOF'
+# Create custom plugins configuration with Dracula theme
+cat >~/.config/nvim/lua/plugins/custom.lua <<'EOF'
 return {
   -- ============================================
   -- FILE EXPLORER (Like VS Code Explorer)
@@ -379,16 +400,19 @@ return {
   },
 
   -- ============================================
-  -- COLORSCHEME (VS Code-like theme)
+  -- COLORSCHEME (Dracula Theme)
   -- ============================================
   {
-    "folke/tokyonight.nvim",
+    "Mofiqul/dracula.nvim",
     lazy = false,
     priority = 1000,
-    opts = {
-      style = "night",  -- storm, moon, night, day
-      transparent = true,  -- No background (use terminal colors)
-    },
+    config = function()
+      require("dracula").setup({
+        transparent_bg = true,  -- Use terminal background
+        italic_comment = true,
+      })
+      vim.cmd([[colorscheme dracula]])
+    end,
   },
 
   -- ============================================
@@ -466,11 +490,24 @@ return {
       },
     },
   },
+
+  -- ============================================
+  -- LAZYGIT INTEGRATION
+  -- ============================================
+  {
+    "kdheepak/lazygit.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    keys = {
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    },
+  },
 }
 EOF
 
 # Create lazyvim.json to enable extras
-cat > ~/.config/nvim/lazyvim.json << 'EOF'
+cat >~/.config/nvim/lazyvim.json <<'EOF'
 {
   "extras": [
     "lazyvim.plugins.extras.lang.typescript",
@@ -502,7 +539,6 @@ echo -e "${GREEN}✓ Prettier installed${NC}"
 # ESLint (linting)
 echo "Installing ESLint..."
 sudo npm install -g eslint_d
-sudo apt install fzf
 echo -e "${GREEN}✓ ESLint installed${NC}"
 
 # ============================================
@@ -511,7 +547,7 @@ echo -e "${GREEN}✓ ESLint installed${NC}"
 echo ""
 echo -e "${BLUE}Step 8: Creating quick reference guide...${NC}"
 
-cat > ~/nvim_quickstart.md << 'EOF'
+cat >~/nvim_quickstart.md <<'EOF'
 # Neovim Quick Start Guide
 
 ## Starting Neovim
@@ -668,6 +704,9 @@ echo ""
 echo "📝 What was installed:"
 echo "  - Neovim (latest version)"
 echo "  - LazyVim (Neovim distribution)"
+echo "  - Dracula theme (dark theme)"
+echo "  - Lazygit (terminal Git UI)"
+echo "  - fzf (fuzzy finder from git)"
 echo "  - LSP servers: TypeScript, Go, C++, HTML/CSS"
 echo "  - Formatters: Prettier, gofmt"
 echo "  - Linters: ESLint"
@@ -686,6 +725,7 @@ echo "💡 First time tips:"
 echo "  - Press 'Space' to see available commands"
 echo "  - Press 'Space e' to open file explorer"
 echo "  - Press 'Ctrl+\`' to open terminal"
+echo "  - Press 'Space g g' to open Lazygit"
 echo "  - Run ':checkhealth' to diagnose issues"
 echo "  - Run ':Mason' to manage LSP servers"
 echo ""
@@ -693,4 +733,4 @@ echo "🎓 Learn Vim motions:"
 echo "  - Run 'vimtutor' in terminal"
 echo "  - Practice h/j/k/l for navigation"
 echo ""
-echo "Enjoy Neovim! 🎉"
+echo "Enjoy Neovim with Dracula theme! 🎉"
