@@ -98,6 +98,15 @@ sudo nano ~/.config/i3/powermenu.sh
 
 ```
 
+install a font for terminal : 
+```
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts
+curl -LO "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+unzip JetBrainsMono.zip
+fc-cache -fv
+```
+
 copy and paste :
 
 ```
